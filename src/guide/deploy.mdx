@@ -1,0 +1,53 @@
+---
+title: 部署与更新
+description: Workers 部署、环境变量、GitHub Actions 自动发布与缓存规则。
+---
+
+# 部署与更新
+
+站点由单个 Cloudflare Worker 提供服务，构建产物是 Vite + `@cloudflare/vite-plugin` 生成的。
+
+## 环境变量
+
+| 变量 | 用途 |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | 部署用 API Token，需 Workers Scripts 编辑权限 |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare 账号 ID |
+
+本地开发时把这两个值写进 `.env.local`；CI 里配置成 Repository Secrets。
+
+<Warning>
+不要把 API Token 提交进 Git 仓库。`.gitignore` 已经排除了所有 `.local` 文件和 `.env*`。
+</Warning>
+
+## 手动部署
+
+```bash
+npm run build
+npx wrangler deploy
+```
+
+## 自动发布
+
+仓库里配置了 GitHub Actions：推送到 `main` 分支时自动执行安装、构建和部署。你只要改 MDX 并合并 PR，几分钟后线上就更新了。
+
+## 关键配置
+
+`wrangler.json` 里有三项不能动：
+
+```json
+{
+  "name": "laidian-holocron-docs",
+  "main": "spiceflow/cloudflare-entrypoint",
+  "compatibility_date": "2026-04-13",
+  "compatibility_flags": ["nodejs_compat"]
+}
+```
+
+`nodejs_compat` 是 Holocron 运行时依赖的兼容层，去掉会直接报错。
+
+## 缓存与域名
+
+- Worker 默认地址是 `*.workers.dev`，国内连通性不稳定，正式对外建议绑定自己的域名（本站点暂未绑定）。
+- 文档页是动态渲染的，建议在 Cloudflare 后台给静态资源路径配置 Cache Rule，缓存 1 小时以上，避免爬虫吃满每日请求额度。
+- 若把某个页面设为 `rendering: static` 预渲染，需要在 `wrangler.json` 里补 `"assets": { "binding": "ASSETS" }`。

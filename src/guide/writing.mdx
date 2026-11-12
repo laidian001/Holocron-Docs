@@ -1,0 +1,79 @@
+---
+title: 内容编写指南
+description: MDX 组件、代码块、提示框、步骤与多语言示例的写法。
+---
+
+# 内容编写指南
+
+页面用 MDX 编写，也就是「Markdown + 少量 React 组件」。绝大多数内容写普通 Markdown 就行。
+
+## Frontmatter
+
+每个文件开头必须有：
+
+```yaml
+---
+title: 页面标题
+description: 一句话说明，用于搜索结果与 SEO
+---
+```
+
+## 提示框
+
+<Tip>推荐做法、能省时间的技巧，用 Tip。</Tip>
+
+<Note>需要留意的边界条件，用 Note。</Note>
+
+<Warning>可能导致数据丢失或不可逆操作，用 Warning。</Warning>
+
+## 步骤
+
+<Steps>
+<Step title="创建文件">
+在 `src/` 下新建 MDX 文件，路径就是最终 URL。
+</Step>
+<Step title="挂到导航">
+把 slug 写进 `docs.json` 的 `pages` 数组，否则页面能访问但侧边栏找不到。
+</Step>
+<Step title="本地检查">
+运行 `npm run dev`，确认排版、链接和代码块都正常。
+</Step>
+</Steps>
+
+## 代码块与多语言
+
+````md
+```bash
+npm run deploy
+```
+````
+
+需要多种语言并列时用 CodeGroup，读者可以切换：
+
+<CodeGroup>
+
+```bash Tab="cURL"
+curl -s https://api.example.com/v1/health
+```
+
+```js Tab="JavaScript"
+const res = await fetch('https://api.example.com/v1/health')
+console.log(await res.json())
+```
+
+```python Tab="Python"
+import requests
+print(requests.get('https://api.example.com/v1/health').json())
+```
+
+</CodeGroup>
+
+## 卡片与折叠
+
+<Card title="部署与更新" icon="cloud" href="/guide/deploy">
+了解自动发布、边缘缓存和自定义域名。
+</Card>
+
+<Accordion title="内容太长怎么组织？">
+用 Steps 拆步骤、用 Tabs 拆场景、用 Accordion 收纳参考资料。单个页面尽量只讲一件事。
+</Accordion>

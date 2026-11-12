@@ -1,0 +1,51 @@
+---
+title: API 概览
+description: 接口基地址、鉴权方式、错误码与分页约定。
+---
+
+# API 概览
+
+本站的 API 参考页由 `openapi.json` 自动生成，右侧「API 参考」标签页可直接查看每个端点的参数与响应结构。
+
+## 基地址
+
+```text
+https://api.example.com/v1
+```
+
+<Tip>
+下面的域名是示例占位，正式接入时请替换成实际服务地址。
+</Tip>
+
+## 鉴权
+
+所有请求都需要在 Header 中携带 Token：
+
+```bash
+curl -H "Authorization: Bearer $TOKEN" \
+  https://api.example.com/v1/health
+```
+
+## 响应结构
+
+成功与失败都返回 JSON：
+
+```json
+{
+  "success": true,
+  "data": { "status": "ok" },
+  "error": null
+}
+```
+
+| 状态码 | 含义 |
+| --- | --- |
+| 200 | 请求成功 |
+| 400 | 参数错误 |
+| 401 | 未授权或 Token 失效 |
+| 429 | 触发限流，稍后重试 |
+| 500 | 服务端错误 |
+
+## 分页
+
+列表接口统一用 `page`（从 1 开始）和 `pageSize`（默认 20，最大 100）两个查询参数。

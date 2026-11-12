@@ -1,0 +1,51 @@
+{
+  "$schema": "https://holocron.so/docs.json",
+  "name": "Laidian Docs",
+  "description": "来电文档 —— 产品使用说明、接入指南与 API 参考",
+  "colors": {
+    "primary": "#4f46e5"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "产品文档",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "开始使用",
+            "icon": "rocket",
+            "pages": ["index", "quickstart"]
+          },
+          {
+            "group": "使用指南",
+            "icon": "map",
+            "pages": ["guide/writing", "guide/deploy"]
+          }
+        ]
+      },
+      {
+        "tab": "API 参考",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "概览",
+            "pages": ["api/overview"]
+          }
+        ],
+        "openapi": "openapi.json"
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/laidian001/laidian-holocron-docs",
+          "icon": "github"
+        }
+      ]
+    }
+  }
+}

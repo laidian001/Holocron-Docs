@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "laidian-holocron-docs",
+  "main": "spiceflow/cloudflare-entrypoint",
+  "compatibility_date": "2026-04-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "routes": [
+    { "pattern": "wen.8886161.xyz", "custom_domain": true }
+  ]
+}

@@ -1,0 +1,35 @@
+---
+title: 来电文档
+description: 产品使用说明、接入指南与 API 参考，托管于 Cloudflare Workers。
+---
+
+<Above className='my-8'>
+
+<h1 className='text-3xl my-3 font-semibold text-center'>来电文档</h1>
+
+<p className='text-center'>一份写给使用者和开发者的产品说明书。</p>
+
+</Above>
+
+## 这是什么
+
+这是基于 **Holocron** 搭建的产品文档站，直接运行在 Cloudflare Workers 上，无需服务器。左侧是分级导航，右侧是正文，全站支持搜索、暗色模式与移动端阅读。
+
+<Tip>
+任意页面地址后加 `.md` 可以拿到纯 Markdown 原文；`/llms.txt` 是全站索引，`/docs.zip` 可一次打包下载。方便把文档喂给 AI 助手。
+</Tip>
+
+## 快速定位
+
+| 你想做的事 | 去看哪一页 |
+| --- | --- |
+| 第一次使用，跑通流程 | [快速开始](/quickstart) |
+| 了解怎么编写与维护内容 | [内容编写指南](/guide/writing) |
+| 把站点部署到自己的账号 | [部署与更新](/guide/deploy) |
+| 对接接口 | [API 概览](/api/overview) |
+
+## 三个约定
+
+- 内容与代码同仓库管理，改动通过 Pull Request 审阅，不直接在线上改。
+- 对外发布的版本在导航里保留独立入口，老版本用户不会看到新功能说明。
+- 每个页面都要写清 `title` 和 `description`，它们会用于导航、搜索结果和 SEO。

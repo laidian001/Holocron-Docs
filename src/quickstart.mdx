@@ -1,0 +1,56 @@
+---
+title: 快速开始
+description: 五分钟跑通本地预览、内容修改与上线发布。
+---
+
+# 快速开始
+
+整个文档站就是一堆 Markdown 文件加一个导航配置。你只需要准备 Node.js 22 及以上版本。
+
+## 1. 安装依赖
+
+```bash
+npm install
+```
+
+## 2. 本地预览
+
+```bash
+npm run dev
+```
+
+打开 `http://localhost:5173`。修改任何 `.mdx` 文件，页面会热更新。
+
+## 3. 写第一页
+
+在 `src/` 下新建 `hello.mdx`：
+
+```mdx
+---
+title: 你好
+description: 我的第一篇文档。
+---
+
+# 你好
+
+这是正文。
+```
+
+然后把 `hello` 加进 `docs.json` 里对应分组的 `pages` 数组。
+
+<Note>
+页面地址由文件路径决定：`src/guide/writing.mdx` 对应 `/guide/writing`。目录可以无限层级，但 slug 不要包含空格。
+</Note>
+
+## 4. 构建并上线
+
+```bash
+npm run deploy
+```
+
+这条命令先用 Vite 构建 Worker 产物，再用 Wrangler 部署到 Cloudflare。首次部署需要 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID` 两个环境变量。
+
+## 下一步
+
+- [内容编写指南](/guide/writing)：MDX 组件、代码块、表格、Callout 的用法
+- [部署与更新](/guide/deploy)：GitHub Actions 自动发布、缓存与自定义域名
